@@ -52,13 +52,11 @@ namespace TestTasks
             }
             else
             {
-                bitness.Add(new JProperty(aspnetcoreV2Name, new JObject(
+                var bitnessString = rid.Substring(rid.Length - 3, 3);
+                bitness.Add(new JProperty($"{bitnessString}/{aspnetcoreV2Name}", new JObject(
                     new JProperty("rid", rid),
                     new JProperty("assetType", "native")
                 )));
-                var outputFolder = Path.GetDirectoryName(depsFile);
-                var bitnessString = rid.Substring(rid.Length - 3, 3);
-                File.Copy(Path.Combine(outputFolder, bitnessString, aspnetcoreV2Name), Path.Combine(outputFolder, aspnetcoreV2Name), overwrite: true);
             }
 
             targetLibrary =
